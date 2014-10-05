@@ -26,6 +26,10 @@ class Photo
     }
   end
 
+  def mtime
+    File.mtime("public/#{$gallery_dir}#{@gallery}/#{@fname}")
+  end
+
   def built?
     File.exists?("public/#{self.thumb}")
   end
@@ -49,7 +53,7 @@ class Gallery
   def photos
     Dir.glob("public/#{$gallery_dir}#{@name}/*.{jpg,JPG}").map{ |fname|
       Photo.new(@name, fname.split("/")[-1])
-    }
+    }.sort_by { |photo| photo.mtime }.reverse()
   end
 end
 
