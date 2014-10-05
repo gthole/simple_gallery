@@ -1,0 +1,13 @@
+#page {
+  margin: 60px;
+}
+.photo {
+  width: 100%;
+  padding: 15px 0 15px 0; 
+}
+.photo-wrapper {
+  min-height: 250px;
+}
+.navbar-color {
+  background-color: #192f53 !important;
+}
