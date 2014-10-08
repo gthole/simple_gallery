@@ -1,4 +1,4 @@
-# myapp.rb
+# app.rb
 require 'sinatra'
 require "sinatra/json"
 
@@ -23,6 +23,7 @@ class App < Sinatra::Base
   get // do
     pass if request.path_info.start_with?("/galleries")
     pass if request.path_info.start_with?("/static")
+    pass if request.path_info.start_with?("/thumbs")
     erb :index
   end
 end

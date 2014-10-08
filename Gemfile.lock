@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.6.0)
+    fssm (0.2.10)
     multi_json (1.10.1)
     rack (1.5.2)
     rack-protection (1.5.3)
@@ -28,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fssm
   rmagick
   shotgun
   sinatra

@@ -1,7 +1,4 @@
-
-$gallery_dir = "galleries/"
-
-
+# gallery.rb
 
 class Photo
   attr_accessor :gallery, :fname
@@ -12,26 +9,22 @@ class Photo
   end
 
   def uri
-    "/#{$gallery_dir}#{@gallery}/#{@fname}"
+    "/galleries/#{@gallery}/#{@fname}"
   end
 
   def thumb
-    "/#{$gallery_dir}#{@gallery}/thumbs/#{@fname}"
+    "/thumbs/#{@gallery}/#{@fname}"
   end
 
   def serialize
     {
       "uri" => self.uri,
-      "thumb" => self.built? ? self.thumb : nil
+      "thumb" => self.thumb
     }
   end
 
   def mtime
-    File.mtime("public/#{$gallery_dir}#{@gallery}/#{@fname}")
-  end
-
-  def built?
-    File.exists?("public/#{self.thumb}")
+    File.mtime("public/galleries/#{@gallery}/#{@fname}")
   end
 end
 
@@ -51,7 +44,7 @@ class Gallery
   end
 
   def photos
-    Dir.glob("public/#{$gallery_dir}#{@name}/*.{jpg,JPG}").map{ |fname|
+    Dir.glob("public/galleries/#{@name}/*.{jpg,JPG}").map{ |fname|
       Photo.new(@name, fname.split("/")[-1])
     }.sort_by { |photo| photo.mtime }.reverse()
   end
@@ -59,7 +52,7 @@ end
 
 
 def get_galleries
-  Dir.glob("public/#{$gallery_dir}*").select{ |name|
+  Dir.glob("public/galleries/*").select{ |name|
     File.directory?(name)
   }.map{ |name|
     Gallery.new(name.split("/")[-1])
