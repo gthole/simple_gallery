@@ -12,8 +12,8 @@ def build_thumb(name)
     thmb_name = "public/thumbs/#{name}"
     FileUtils.mkdir_p File.dirname(thmb_name)
 
-    nh = (600 / w) * h
-    img.resize_to_fit!(600, nh)
+    nh = (300 / w) * h
+    img.resize_to_fit!(300, nh)
     img.write(thmb_name)
   end
 end
