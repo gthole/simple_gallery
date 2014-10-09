@@ -1,12 +1,12 @@
-#page {
-  margin: 60px;
+.page {
+  margin: 60px auto 0 auto;
+}
+.page #img-container {
+  margin: 0 auto;
 }
 .photo {
-  width: 100%;
-  padding: 15px 0 15px 0; 
-}
-.photo-wrapper {
-  min-height: 250px;
+  max-width: 300px;
+  margin: 2px;
 }
 .navbar-color {
   background-color: #192f53 !important;

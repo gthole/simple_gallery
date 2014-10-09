@@ -39,6 +39,7 @@ class Gallery
   def serialize
     {
       "name" => @name,
+      "formattedName" => @name.gsub("-", " "),
       "photos" => self.photos.map { |p| p.serialize }
     }
   end

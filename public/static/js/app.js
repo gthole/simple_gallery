@@ -1,10 +1,12 @@
 // Filename: app.js
 define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'router',
+  "jquery",
+  "underscore",
+  "backbone",
+  "router",
 ], function($, _, Backbone, Router){
+  "use strict";
+
   var initialize = function(){
     Router.initialize();
   };
