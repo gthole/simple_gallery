@@ -42,16 +42,17 @@ define([
       var gal = new GalleryModel({name: name});
       gal.fetch({
         success: function() {
+          $(".navbar-brand").html("Gallery / " + gal.get("formattedName"));
           var rendered = Mustache.render(
             galleryTemplate,
             gal.toJSON()
           );
           $(".page").html(rendered);
           var container = $("#img-container");
-          container.imagesLoaded( function() {
+          container.imagesLoaded(function() {
             container.masonry({isFitWidth: true});
           });
-       }
+        }
       })
     }
   });

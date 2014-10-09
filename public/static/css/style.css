@@ -9,5 +9,11 @@
   margin: 2px;
 }
 .navbar-color {
-  background-color: #192f53 !important;
+  background-color: #AF9B60 !important;
+  opacity: 0.95;
 }
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
