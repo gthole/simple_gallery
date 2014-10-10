@@ -8,6 +8,8 @@ require_relative 'gallery'
 class App < Sinatra::Base
   helpers Sinatra::JSON
 
+  attr_accessor :script
+
   # Core API methods
   get '/api/v1/gallery/' do
     gals = get_galleries()
@@ -24,6 +26,10 @@ class App < Sinatra::Base
     pass if request.path_info.start_with?("/galleries")
     pass if request.path_info.start_with?("/static")
     pass if request.path_info.start_with?("/thumbs")
+
+    # Find javascript build if present
+    @script = Dir.glob("public/static/js/script*.js").map {
+      |fn| fn[7..-1]}[0]
     erb :index
   end
 end
