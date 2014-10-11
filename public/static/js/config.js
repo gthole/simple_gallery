@@ -18,4 +18,4 @@ require.config({
     "masonry": ["jquery"],
     "imagesloaded": ["jquery"]
   }
-})
+});
