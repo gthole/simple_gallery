@@ -43,6 +43,9 @@ define([
           var $item = $(image.img).parents(".item");
           $item.show();
           self.msnry.appended($item);
+        }).on("always", function() {
+          // Continue loading images if there's still space to fill
+          self.scrollRender();
         });
       }
     },
