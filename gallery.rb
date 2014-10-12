@@ -30,21 +30,31 @@ end
 
 
 class Gallery
-  attr_accessor :name
+  attr_accessor :name, :cached_photos
 
   def initialize(name)
     @name = name
+    @cached_photos = nil
   end
 
-  def serialize
+  def serialize(limit=false)
+    if limit and self.photos
+      photos = self.photos[0].serialize
+    else
+      photos = self.photos.map{ |p| p.serialize }
+    end
+
     {
       "name" => @name,
       "formattedName" => @name.gsub("-", " "),
-      "photos" => self.photos.map { |p| p.serialize }
+      "photos" => photos
     }
   end
 
   def photos
+    if cached_photos
+      return cached_photos
+    end
     Dir.glob("public/galleries/#{@name}/*.{jpg,JPG}").map{ |fname|
       Photo.new(@name, fname.split("/")[-1])
     }.sort_by { |photo| photo.mtime }.reverse()

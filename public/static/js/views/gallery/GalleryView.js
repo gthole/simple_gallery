@@ -12,12 +12,14 @@ define([
   "use strict";
 
   return Backbone.View.extend({
-    initialize: function() {
+    initialize: function(options) {
+      this.el = options.el;
+      this.titleEl = options.titleEl;
+      this.data = options.data;
+
       var self = this;
       $(window).scroll(function() {self.scrollRender();});
     },
-
-    el: $(".page"),
 
     renderPhotos: function() {
       var self = this,
@@ -35,7 +37,7 @@ define([
       if (items.length) {
         var $items = $(items);
         $items.hide();
-        $("#img-container").append($items);
+        this.$("#img-container").append($items);
         var imgld = new ImagesLoaded($items);
         imgld.on("progress", function(imgLoad, image) { // jshint ignore:line
           var $item = $(image.img).parents(".item");
@@ -52,25 +54,23 @@ define([
       }
     },
 
-    render: function(name) {
-      var self = this;
-      var gal = new GalleryModel({name: name});
-      gal.fetch({
-        success: function() {
-          $(".navbar-brand").html("Gallery / " + gal.get("formattedName"));
-          var rendered = Mustache.render(galleryTemplate);
-          $(".page").html(rendered);
-          self.photos = gal.get("photos");
+    render: function() {
+      var gal = new GalleryModel(this.options.data);
 
-          self.msnry = new Masonry(
-            "#img-container",
-            {
-              columnWidth: 10, isFitWidth: true
-            }
-          );
-          self.renderPhotos();
-        }
-      });
+      // Set the gallery name
+      this.titleEl.html("Gallery / " + gal.get("formattedName"));
+
+      // Render the base template
+      var rendered = Mustache.render(galleryTemplate);
+      this.el.html(rendered);
+
+      // Bind photos to view and start loading them in
+      this.photos = gal.get("photos");
+      this.msnry = new Masonry(
+        "#img-container",
+        {columnWidth: 8, isFitWidth: true}
+      );
+      this.renderPhotos();
     }
   });
 });

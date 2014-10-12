@@ -16,17 +16,17 @@ define([
     }
   });
 
-  var initialize = function() {
+  var initialize = function(options) {
     var appRouter = new AppRouter();
 
     appRouter.on("route:showGallery", function(name) {
-      var galleryView = new GalleryView();
+      var galleryView = new GalleryView(options);
       galleryView.render(name);
     });
 
     appRouter.on("route:defaultAction", function() {
       // Default route to the home page
-      var homeView = new HomeView();
+      var homeView = new HomeView(options);
       homeView.render();
     });
 
