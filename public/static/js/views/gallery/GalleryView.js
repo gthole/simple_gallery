@@ -58,7 +58,7 @@ define([
     },
 
     render: function() {
-      var gal = new GalleryModel(this.options.data);
+      var gal = new GalleryModel(this.data);
 
       // Render the base template
       var rendered = Mustache.render(galleryTemplate);

@@ -1,4 +1,4 @@
-// Filename: config.js
+// Filename: app.js
 require([
   "app"
 ], function(App) {

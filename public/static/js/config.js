@@ -2,20 +2,20 @@
 require.config({
   deps: ["main"],
   paths: {
-    jquery: "libs/jquery/jquery-min",
+    jquery: "libs/jquery/dist/jquery.min",
     underscore: "libs/underscore/underscore-min",
-    masonry: "libs/masonry/masonry.pkgd.min",
+    masonry: "libs/masonry/dist/masonry.pkgd.min",
     imagesloaded: "libs/imagesloaded/imagesloaded.pkgd.min",
     mustache: "libs/mustache/mustache",
-    backbone: "libs/backbone/backbone-min",
+    backbone: "libs/backbone/backbone",
     templates: "../templates"
   },
   shim: {
-    "backbone": {
+    backbone: {
       deps: ["jquery", "underscore"],
       exports: "Backbone"
     },
-    "masonry": ["jquery"],
-    "imagesloaded": ["jquery"]
+    masonry: ["jquery"],
+    imagesloaded: ["jquery"]
   }
 });

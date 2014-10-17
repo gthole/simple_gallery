@@ -9,7 +9,17 @@ To use, install `rvm` and `node`
 
 ```bash
 $ cd simple_gallery
+
+# Install ruby dependencies
 $ bundle install
+
+# Install node modules
+$ npm install
+
+# Install javascript app dependencies
+$ node_modules/grunt-cli/bin/grunt bower-install
+
+# Create a directory to watch and start the app
 $ mkdir -p public/galleries
 $ foreman start
 ```
@@ -20,7 +30,7 @@ Run the grunt task to create the javascript build:
 
 ```bash
 $ npm install
-$ node_modules/grunt-cli/bin/grunt
+$ node_modules/grunt-cli/bin/grunt build
 ```
 
 The sinatra app will automatically pick up the compiled script and use that over the individual files.

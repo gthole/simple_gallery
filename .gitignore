@@ -1,5 +1,6 @@
 *.swp
 node_modules/
+public/static/js/libs
 public/galleries/
 public/thumbs/
 .DS_Store

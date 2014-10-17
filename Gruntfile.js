@@ -52,6 +52,18 @@ module.exports = function(grunt) {
       }
     },
 
+    "bower-install-simple": {
+      options: {
+        color: true,
+        directory: "public/static/js/libs"
+      },
+      prod: {
+        options: {
+          production: true
+        }
+      }
+    },
+
     requirejs: {
       build: {
         options: {
@@ -81,11 +93,13 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-jscs");
+  grunt.loadNpmTasks("grunt-bower-install-simple");
   grunt.loadNpmTasks("grunt-contrib-requirejs");
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-clean");
 
   grunt.registerTask("test", ["jshint", "jscs"]);
+  grunt.registerTask("bower-install", ["bower-install-simple"]);
   grunt.registerTask("build", ["requirejs:build", "uglify:build", "clean"]);
 
   // Default task.

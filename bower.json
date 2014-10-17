@@ -1,0 +1,18 @@
+{
+  "name": "simple_gallery",
+  "version": "0.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/static/js/libs"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "almond": "~0.3.0",
+    "backbone": "~1.1.2",
+    "mustache": "~0.8.2",
+    "masonry": "~3.1.5",
+    "imagesloaded": "~3.1.8",
+    "requirejs": "latest"
+  }
+}
