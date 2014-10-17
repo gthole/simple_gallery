@@ -9,7 +9,7 @@ body {
 }
 .photo {
   min-width: 300px;
-  margin: 2px;
+  margin: 0 2px 0 2px;
 }
 .nav {
   position: fixed;
