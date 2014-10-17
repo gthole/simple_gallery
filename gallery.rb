@@ -23,8 +23,8 @@ class Photo
     }
   end
 
-  def mtime
-    File.mtime("public/galleries/#{@gallery}/#{@fname}")
+  def ctime
+    File.ctime("public/galleries/#{@gallery}/#{@fname}")
   end
 end
 
@@ -57,7 +57,7 @@ class Gallery
     end
     Dir.glob("public/galleries/#{@name}/*.{jpg,JPG}").map{ |fname|
       Photo.new(@name, fname.split("/")[-1])
-    }.sort_by { |photo| photo.mtime }.reverse()
+    }.sort_by { |photo| photo.ctime }
   end
 end
 
