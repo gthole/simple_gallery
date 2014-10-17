@@ -5,15 +5,14 @@ require 'json'
 
 require_relative 'gallery'
 
-
 class App < Sinatra::Base
   helpers Sinatra::JSON
 
-  attr_accessor :script
-
-  # Find javascript build if present
-  @script = Dir.glob("public/static/js/script*.js").map {
-    |fn| fn[7..-1]}[0]
+  configure do
+    # Find javascript build if present
+    set :script, Dir.glob("public/static/js/script*.js").map {
+      |fn| fn[7..-1]}[-1]
+  end
 
   # Core API methods
   get '/api/v1/gallery/' do
@@ -30,6 +29,7 @@ class App < Sinatra::Base
   # TODO: DRY the data calls
   get '/' do
     gals = get_galleries()
+    @script = settings.script
     @data = {:objects => gals.map {|gal| gal.serialize(limit: true) }}
     erb :index
   end
@@ -41,6 +41,7 @@ class App < Sinatra::Base
     pass if request.path_info.start_with?("/thumbs")
 
     gal = Gallery.new(gallery_name).serialize
+    @script = settings.script
     @data = gal
     @name = gal["formattedName"]
     erb :index
