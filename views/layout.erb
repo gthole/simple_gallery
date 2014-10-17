@@ -8,10 +8,6 @@
 
     <title>Gallery</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
     <link href="/static/css/style.css" rel="stylesheet">
 
     <% if @script %>
@@ -21,12 +17,8 @@
     <% end %>
   </head>
   <body>
-      <div class="navbar navbar-color navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">Gallery</a>
-          </div>
-        </div>
+      <div class="nav">
+        <span class="nav-title"><a href="/">Gallery</a><% if @name %> / <%= @name %><% end %></span>
       </div>
       <div class="page"></div>
       <script class="bootstrapData" type="data"><%= @data.to_json %></script>

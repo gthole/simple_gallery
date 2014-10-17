@@ -1,5 +1,8 @@
+body {
+  font-family: Gill Sans, sans-serif;
+}
 .page {
-  margin: 60px auto 10px auto;
+  margin: 50px auto 10px auto;
 }
 .page #img-container {
   margin: 0 auto;
@@ -8,12 +11,21 @@
   min-width: 300px;
   margin: 2px;
 }
-.navbar-color {
-  background-color: #AF9B60 !important;
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 25px;
   opacity: 0.95;
+  z-index: 99999;
+  background-color: #FAEBD7;
+  padding: 10px;
 }
-.navbar-brand {
-  color: #fff !important;
+.nav-title a {
+  text-decoration: none;
+  color: #333;
   font-weight: bold;
+  font-size: 15px;
 }
 

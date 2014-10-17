@@ -40,7 +40,9 @@ class App < Sinatra::Base
     pass if request.path_info.start_with?("/static")
     pass if request.path_info.start_with?("/thumbs")
 
-    @data = Gallery.new(gallery_name).serialize
+    gal = Gallery.new(gallery_name).serialize
+    @data = gal
+    @name = gal["formattedName"]
     erb :index
   end
 end

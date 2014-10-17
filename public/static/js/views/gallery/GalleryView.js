@@ -60,9 +60,6 @@ define([
     render: function() {
       var gal = new GalleryModel(this.options.data);
 
-      // Set the gallery name
-      this.titleEl.html("Gallery / " + gal.get("formattedName"));
-
       // Render the base template
       var rendered = Mustache.render(galleryTemplate);
       this.el.html(rendered);
