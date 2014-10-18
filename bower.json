@@ -13,6 +13,7 @@
     "mustache": "~0.8.2",
     "masonry": "~3.1.5",
     "imagesloaded": "~3.1.8",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "nprogress": "~0.1.6"
   }
 }

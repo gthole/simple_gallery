@@ -5,10 +5,11 @@ define([
   "models/gallery/GalleryModel",
   "masonry",
   "imagesloaded",
+  "nprogress",
   "text!templates/gallery/galleryTemplate.mustache",
   "text!templates/gallery/photoTemplate.mustache"
 ], function($, Mustache, Backbone, GalleryModel, Masonry, ImagesLoaded,
-            galleryTemplate, photoTemplate) {
+            NProgress, galleryTemplate, photoTemplate) {
   "use strict";
 
   return Backbone.View.extend({
@@ -24,10 +25,11 @@ define([
     renderPhotos: function() {
       var self = this,
           items = "",
-          i = 0;
+          i = 0,
+          batchCount = window.innerWidth < 400 ? 5 : 10;
 
       // Generate image html
-      while (i < 10 && this.photos.length) {
+      while (i < batchCount && this.photos.length) {
         i += 1;
         items += Mustache.render(photoTemplate, this.photos.pop());
       }
@@ -35,15 +37,17 @@ define([
       // If there are any new images, add them to masonry
       // This bit is based on http://codepen.io/desandro/pen/kwsJb
       if (items.length) {
+        NProgress.start();
         var $items = $(items);
         $items.hide();
         this.$("#img-container").append($items);
         var imgld = new ImagesLoaded($items);
-        imgld.on("progress", function(imgLoad, image) { // jshint ignore:line
-          var $item = $(image.img).parents(".item");
-          $item.show();
-          self.msnry.appended($item);
+        imgld.on("progress", function() {
+          NProgress.inc(1 / batchCount);
         }).on("always", function() {
+          NProgress.done();
+          $items.show();
+          self.msnry.appended($items);
           // Continue loading images if there's still space to fill
           self.scrollRender();
         });

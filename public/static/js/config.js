@@ -6,6 +6,7 @@ require.config({
     underscore: "libs/underscore/underscore-min",
     masonry: "libs/masonry/dist/masonry.pkgd.min",
     imagesloaded: "libs/imagesloaded/imagesloaded.pkgd.min",
+    nprogress: "libs/nprogress/nprogress",
     mustache: "libs/mustache/mustache",
     backbone: "libs/backbone/backbone",
     templates: "../templates"
