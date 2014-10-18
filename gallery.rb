@@ -13,7 +13,7 @@ class Photo
   end
 
   def thumb
-    "/thumbs/#{@gallery}/#{@fname}"
+    "/galleries/#{@gallery}/_thumbs/#{@fname}"
   end
 
   def serialize
