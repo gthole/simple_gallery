@@ -7,9 +7,11 @@ define([
   "imagesloaded",
   "nprogress",
   "text!templates/gallery/galleryTemplate.mustache",
-  "text!templates/gallery/photoTemplate.mustache"
+  "text!templates/gallery/photoTemplate.mustache",
+  "text!templates/gallery/modalContent.mustache"
 ], function($, Mustache, Backbone, GalleryModel, Masonry, ImagesLoaded,
-            NProgress, galleryTemplate, photoTemplate) {
+            NProgress, galleryTemplate, photoTemplate,
+            modalContentsTemplate) {
   "use strict";
 
   return Backbone.View.extend({
@@ -17,9 +19,16 @@ define([
       this.el = options.el;
       this.titleEl = options.titleEl;
       this.data = options.data;
+      this.router = options.router;
 
       var self = this;
       $(window).scroll(function() {self.scrollRender();});
+    },
+
+    events: {
+      "click .modal": "closeModal",
+      "click .photo": "openModal",
+      "click .modal-image": "nextImage"
     },
 
     renderPhotos: function() {
@@ -31,7 +40,10 @@ define([
       // Generate image html
       while (i < batchCount && this.photos.length) {
         i += 1;
-        items += Mustache.render(photoTemplate, this.photos.pop());
+        items += Mustache.render(
+          photoTemplate,
+          {"gal": this.gal.get("name"), "img": this.photos.pop()}
+        );
       }
 
       // If there are any new images, add them to masonry
@@ -61,20 +73,58 @@ define([
       }
     },
 
-    render: function() {
-      var gal = new GalleryModel(this.data);
+    closeModal: function() {
+      $(".modal").hide();
+    },
+
+    openModal: function(ev) {
+      var img = $(ev.currentTarget).data("img");
+      this.displayImage(img);
+    },
+
+    nextImage: function(ev) {
+      ev.stopPropagation();
+      // Walk through the images when clicking on the photo.
+      var cur = $(ev.currentTarget).data("img");
+      var photos = this.gal.get("photos");
+      var index = photos.indexOf(cur);
+      var nextIndex = index <= 0 ? photos.length - 1 : index - 1;
+      this.displayImage(photos[nextIndex]);
+    },
+
+    displayImage: function(img) {
+      // TODO: Use modern approach to this.
+      window.location.hash = img;
+      var $modal = this.$(".modal");
+      $modal.hide();
+      var width = $(window).width() < 600 ? 300 : 600;
+      var rendered = Mustache.render(
+        modalContentsTemplate,
+        {"gal": this.gal.get("name"), "img": img, "width": width}
+      );
+      this.$(".modal-content").html(rendered);
+      $modal.show();
+    },
+
+    render: function(name, img) {
+      this.gal = new GalleryModel(this.data);
 
       // Render the base template
       var rendered = Mustache.render(galleryTemplate);
       this.el.html(rendered);
 
       // Bind photos to view and start loading them in
-      this.photos = gal.get("photos");
+      this.photos = this.gal.get("photos").slice(0);
       this.msnry = new Masonry(
         "#img-container",
         {columnWidth: 8, isFitWidth: true}
       );
       this.renderPhotos();
+
+      var hash = window.location.hash.slice(1);
+      if (hash) {
+        this.displayImage(hash);
+      }
     }
   });
 });

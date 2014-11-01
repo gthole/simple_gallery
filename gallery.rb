@@ -8,21 +8,6 @@ class Photo
     @fname = fname
   end
 
-  def uri
-    "/galleries/#{@gallery}/#{@fname}"
-  end
-
-  def thumb
-    "/galleries/#{@gallery}/_thumbs/#{@fname}"
-  end
-
-  def serialize
-    {
-      "uri" => self.uri,
-      "thumb" => self.thumb
-    }
-  end
-
   def ctime
     File.ctime("public/galleries/#{@gallery}/#{@fname}")
   end
@@ -39,9 +24,9 @@ class Gallery
 
   def serialize(limit=false)
     if limit and self.photos
-      photos = self.photos[0].serialize
+      photos = self.photos[0].fname
     else
-      photos = self.photos.map{ |p| p.serialize }
+      photos = self.photos.map{ |p| p.fname }
     end
 
     {

@@ -18,6 +18,7 @@ define([
 
   var initialize = function(options) {
     var appRouter = new AppRouter();
+    options.router = appRouter;
 
     appRouter.on("route:showGallery", function(name) {
       var galleryView = new GalleryView(options);
