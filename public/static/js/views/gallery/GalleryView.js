@@ -96,14 +96,20 @@ define([
       // TODO: Use modern approach to this.
       window.location.hash = img;
       var $modal = this.$(".modal");
-      $modal.hide();
+      var $modalContent = this.$(".modal-content");
+
+      // Replace the modal content
+      $modalContent.hide();
       var width = $(window).width() < 600 ? 300 : 600;
       var rendered = Mustache.render(
         modalContentsTemplate,
         {"gal": this.gal.get("name"), "img": img, "width": width}
       );
-      this.$(".modal-content").html(rendered);
+      $modalContent.html(rendered);
+
+      // Show the content
       $modal.show();
+      $modalContent.fadeIn();
     },
 
     render: function(name, img) {
