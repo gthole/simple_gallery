@@ -112,7 +112,7 @@ define([
       $modalContent.fadeIn();
     },
 
-    render: function(name, img) {
+    render: function() {
       this.gal = new GalleryModel(this.data);
 
       // Render the base template
