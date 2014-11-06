@@ -43,6 +43,7 @@ class App < Sinatra::Base
     @data = gal
     @gname = gallery_name
     @fname = gal["formattedName"]
+    @host = "#{ request.scheme }://#{ request.host }"
     @image = params[:i] || gal["photos"][-1]
     erb :index
   end
