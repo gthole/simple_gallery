@@ -11,7 +11,8 @@
     <link href="/static/css/nprogress.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
   <% if @gname and @image %>
-    <link href="<%= @host %>/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" rel="image_src">
+    <link href="<%= @host %>/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" rel="image_src" />
+    <meta property="og:image" content="<%= @host %>/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" />
   <% end %>
 
   <% if @script %>
