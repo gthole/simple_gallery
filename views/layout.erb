@@ -10,16 +10,19 @@
 
     <link href="/static/css/nprogress.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
+  <% if @gname and @image %>
+    <link href="/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" rel="image_src">
+  <% end %>
 
-    <% if @script %>
-      <script src="<%= @script %>"></script>
-    <% else %>
-      <script data-main="/static/js/config" src="/static/js/libs/requirejs/require.js"></script>
-    <% end %>
+  <% if @script %>
+    <script src="<%= @script %>"></script>
+  <% else %>
+    <script data-main="/static/js/config" src="/static/js/libs/requirejs/require.js"></script>
+  <% end %>
   </head>
   <body>
       <div class="nav">
-        <span class="nav-title"><a href="/">Gallery</a><% if @name %> / <%= @name %><% end %></span>
+        <span class="nav-title"><a href="/">Gallery</a><% if @fname %> / <%= @fname %><% end %></span>
       </div>
       <div class="page"></div>
       <script class="bootstrapData" type="data"><%= @data.to_json %></script>

@@ -93,8 +93,7 @@ define([
     },
 
     displayImage: function(img) {
-      // TODO: Use modern approach to this.
-      window.location.hash = img;
+      this.router.navigate("/" + this.name + "?i=" + img);
       var $modal = this.$(".modal");
       var $modalContent = this.$(".modal-content");
 
@@ -112,7 +111,8 @@ define([
       $modalContent.fadeIn();
     },
 
-    render: function() {
+    render: function(name) {
+      this.name = name;
       this.gal = new GalleryModel(this.data);
 
       // Render the base template
@@ -127,7 +127,7 @@ define([
       );
       this.renderPhotos();
 
-      var hash = window.location.hash.slice(1);
+      var hash = window.location.search.slice(3);
       if (hash) {
         this.displayImage(hash);
       }

@@ -41,7 +41,9 @@ class App < Sinatra::Base
     gal = Gallery.new(gallery_name).serialize
     @script = SCRIPT
     @data = gal
-    @name = gal["formattedName"]
+    @gname = gallery_name
+    @fname = gal["formattedName"]
+    @image = params[:i] || gal["photos"][-1]
     erb :index
   end
 end
