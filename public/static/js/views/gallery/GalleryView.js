@@ -78,11 +78,13 @@ define([
     },
 
     openModal: function(ev) {
+      ev.preventDefault();
       var img = $(ev.currentTarget).data("img");
       this.displayImage(img);
     },
 
     nextImage: function(ev) {
+      ev.preventDefault();
       ev.stopPropagation();
       // Walk through the images when clicking on the photo.
       var cur = $(ev.currentTarget).data("img");
