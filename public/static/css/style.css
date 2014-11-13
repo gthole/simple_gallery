@@ -1,8 +1,13 @@
+html {
+  height: 100%;
+}
 body {
   font-family: Gill Sans, sans-serif;
+  height: 100%;
 }
 .page {
   margin: 50px auto 20px auto;
+  height: 100%;
 }
 .page #img-container {
   margin: 0 auto;
@@ -43,6 +48,7 @@ body {
   display: inline-block;
   margin: 5% auto;
   height: 100%;
+  width: 100%;
 }
 .wide {
   width: 96%;
