@@ -9,14 +9,14 @@
     <title>Gallery</title>
 
     <link href="/static/css/nprogress.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style.css<% if @version %>?v=<%= @version %><% end %>" rel="stylesheet">
   <% if @gname and @image %>
     <link href="<%= @host %>/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" rel="image_src" />
     <meta property="og:image" content="<%= @host %>/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" />
   <% end %>
 
-  <% if @script %>
-    <script src="<%= @script %>"></script>
+  <% if @version %>
+    <script src="/static/js/script.js?q=<%= @version %>"></script>
   <% else %>
     <script data-main="/static/js/config" src="/static/js/libs/requirejs/require.js"></script>
   <% end %>

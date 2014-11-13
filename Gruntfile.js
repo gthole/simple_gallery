@@ -81,14 +81,11 @@ module.exports = function(grunt) {
       options: {},
       build: {
         files: {
-          "public/static/js/script<%= version %>.js":
-            "public/static/js/script-tmp.js"
+          "public/static/js/script.js": "public/static/js/script-tmp.js"
         }
       }
     },
-    clean: ["public/static/js/script-tmp.js"],
-
-    version: (new Date()).getTime()
+    clean: ["public/static/js/script-tmp.js"]
   });
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
