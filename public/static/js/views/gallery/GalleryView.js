@@ -107,10 +107,19 @@ define([
         {"gal": this.gal.get("name"), "img": img, "width": width}
       );
       $modalContent.html(rendered);
-
-      // Show the content
       $modal.show();
-      $modalContent.fadeIn();
+      var imgld = new ImagesLoaded($modalContent);
+      imgld.on("always", function() {
+        // Determine the direction to fill on
+        var $img = $modalContent.find(".modal-image")[0];
+        var imgRatio = $img.height / $img.width;
+        var winRatio = $(window).height() / $(window).width();
+        var cls = imgRatio > winRatio ? "tall" : "wide";
+        $($img).addClass(cls);
+
+        // Show the content
+        $modalContent.fadeIn();
+      });
     },
 
     render: function(name) {
