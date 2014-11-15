@@ -2,14 +2,30 @@ body {
   font-family: Gill Sans, sans-serif;
 }
 .page {
-  margin: 50px auto 20px auto;
+  margin: 50px 0 20px 0;
 }
 .page #img-container {
-  margin: 0 auto;
+  overflow: hidden;
+}
+/* Responsive grid patterns */
+.grid-sizer,.item {
+  width: 50%;
+}
+@media screen and (min-width: 480px) and (max-width: 719px) {
+  .grid-sizer,.item { width: 33%; }
+}
+@media screen and (min-width: 720px) and (max-width: 959px) {
+  .grid-sizer,.item { width: 25%; }
+}
+@media screen and (min-width: 960px) and (max-width: 1679px) {
+  .grid-sizer,.item { width: 20%; }
+}
+@media screen and (min-width: 1680px) {
+  .grid-sizer,.item { width: 10%; }
 }
 .photo {
-  min-width: 300px;
-  margin: 0 2px 0 2px;
+  max-width: 100%;
+  min-width: 100%;
 }
 .nav {
   position: fixed;

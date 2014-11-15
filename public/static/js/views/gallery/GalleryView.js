@@ -134,7 +134,7 @@ define([
       this.photos = this.gal.get("photos").slice(0);
       this.msnry = new Masonry(
         "#img-container",
-        {columnWidth: 8, isFitWidth: true}
+        {columnWidth: ".grid-sizer", itemSelector: ".item"}
       );
       this.renderPhotos();
 
