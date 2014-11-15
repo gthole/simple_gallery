@@ -6,9 +6,9 @@ require 'json'
 require_relative 'gallery'
 
 # Get git version for cache-busting
-VERSION = nil
+$VERSION = nil
 if Dir.glob("public/static/js/script.js").length > 0
-  VERSION = `git rev-parse HEAD`
+  $VERSION = `git rev-parse HEAD`
 end
 
 
@@ -30,7 +30,7 @@ class App < Sinatra::Base
   # TODO: DRY the data calls
   get '/' do
     gals = get_galleries()
-    @version = VERSION
+    @version = $VERSION
     @data = {:objects => gals.map {|gal| gal.serialize(limit: true) }}
     erb :index
   end
@@ -41,7 +41,7 @@ class App < Sinatra::Base
     pass if request.path_info.start_with?("/static")
 
     gal = Gallery.new(gallery_name).serialize
-    @version = VERSION
+    @version = $VERSION
     @data = gal
     @gname = gallery_name
     @fname = gal["formattedName"]
