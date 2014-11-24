@@ -32,14 +32,12 @@ def build_thumb(base, img, thmb_dir, width)
 end
 
 
-FSSM.monitor("public/galleries/", '**/*') do
-  update do |b, r, t|
+FSSM.monitor("public/galleries/", '*/*') do
+  update do |b, r|
     build_thumbs(r)
   end
 
-  create do |b, r, t|
+  create do |b, r|
     build_thumbs(r)
   end
 end
-
-
