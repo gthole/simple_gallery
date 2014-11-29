@@ -10,6 +10,7 @@ body {
 /* Responsive grid patterns */
 .grid-sizer,.item {
   width: 50%;
+  margin-bottom: 0;
 }
 @media screen and (min-width: 480px) and (max-width: 719px) {
   .grid-sizer,.item { width: 33%; }
@@ -66,5 +67,35 @@ body {
 }
 .tall {
   height: 90%;
+}
+.gallery-list-item {
+  clear: both;
+  max-height: 200px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+}
+.gallery-list-item a {
+  float: left;
+  width: 33%;
+}
+.gallery-list-image {
+  max-width: 100%;
+  min-width: 100%;
+}
+.gallery-list-info h4 a {
+  color: #333;
+  text-decoration: none;
+}
+.gallery-list-info h4 {
+  margin-top: 0;
+  padding-top: 0;
+}
+.gallery-list-info {
+  width: 64%;
+  margin-left: 33%;
+  padding-left: 10px;
+}
+@media screen and (max-width: 480px) {
+  .gallery-list-info h4 { color: #fff; margin-top: 0; }
 }
 

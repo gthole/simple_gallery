@@ -42,7 +42,7 @@ define([
         i += 1;
         items += Mustache.render(
           photoTemplate,
-          {"gal": this.gal.get("name"), "img": this.photos.pop()}
+          {"gal": this.gal.get("id"), "img": this.photos.pop()}
         );
       }
 
@@ -95,7 +95,7 @@ define([
     },
 
     displayImage: function(img) {
-      this.router.navigate("/" + this.name + "?i=" + img);
+      this.router.navigate("/" + this.id + "?i=" + img);
       var $modal = this.$(".modal");
       var $modalContent = this.$(".modal-content");
 
@@ -104,7 +104,7 @@ define([
       var width = $(window).width() < 600 ? 300 : 600;
       var rendered = Mustache.render(
         modalContentsTemplate,
-        {"gal": this.gal.get("name"), "img": img, "width": width}
+        {"gal": this.gal.get("id"), "img": img, "width": width}
       );
       $modalContent.html(rendered);
       $modal.show();
@@ -122,8 +122,8 @@ define([
       });
     },
 
-    render: function(name) {
-      this.name = name;
+    render: function(id) {
+      this.id = id;
       this.gal = new GalleryModel(this.data);
 
       // Render the base template

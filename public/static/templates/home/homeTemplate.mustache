@@ -1,5 +1,11 @@
-<ul>
 {{# galleries }}
-  <li><a href="/{{name}}">{{ name }}</a></li>
+<div class="gallery-list-item">
+  <a href="/{{ id }}">
+    <img class="gallery-list-image" src="/galleries/{{id}}/_thumbs/300/{{ lead }}">
+  </a>
+    <div class="gallery-list-info">
+      <h4 class="gallery-list-lead">&nbsp;<a href="/{{id}}">{{ name }}</a></h4>
+      {{description}}
+    </div>
+  </div>
 {{/ galleries }}
-</li>
