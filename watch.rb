@@ -38,14 +38,14 @@ end
 
 
 # Walk the directories on load to make sure all thumbs exist
-# puts "Checking thumbs ..."
-# Dir.glob("public/galleries/*/*.{jpg,JPG}").each{ |file|
-#   gal, name = file.split("/")[-2..-1]
-#   if not (File.exists?("public/galleries/#{gal}/_thumbs/300/#{name}") and
-#           File.exists?("public/galleries/#{gal}/_thumbs/600/#{name}"))
-#     build_thumbs("#{gal}/#{name}")
-#   end
-# }
+puts "Checking thumbs ..."
+Dir.glob("public/galleries/*/*.{jpg,JPG}").each{ |file|
+  gal, name = file.split("/")[-2..-1]
+  if not (File.exists?("public/galleries/#{gal}/_thumbs/300/#{name}") and
+          File.exists?("public/galleries/#{gal}/_thumbs/600/#{name}"))
+    build_thumbs("#{gal}/#{name}")
+  end
+}
 
 
 # Monitor the directories for new images
