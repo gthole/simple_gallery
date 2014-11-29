@@ -15,17 +15,17 @@
     <meta property="og:image" content="<%= @host %>/galleries/<%= @gname %>/_thumbs/300/<%= @image %>" />
   <% end %>
 
-  <% if @version %>
-    <script src="/static/js/script.js?q=<%= @version %>"></script>
-  <% else %>
-    <script data-main="/static/js/config" src="/static/js/libs/requirejs/require.js"></script>
-  <% end %>
-  </head>
+ </head>
   <body>
       <div class="nav">
         <span class="nav-title"><a href="/">Gallery</a><% if @fname %> / <%= @fname %><% end %></span>
       </div>
       <div class="page"></div>
       <script class="bootstrapData" type="data"><%= @data.to_json %></script>
+      <% if @version %>
+        <script src="/static/js/script.js?q=<%= @version %>"></script>
+      <% else %>
+        <script data-main="/static/js/config" src="/static/js/libs/requirejs/require.js"></script>
+      <% end %>
   </body>
 </html>
