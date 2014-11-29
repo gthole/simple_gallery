@@ -1,4 +1,5 @@
 # gallery.rb
+require 'yaml'
 
 class Photo
   attr_accessor :gallery, :fname
@@ -17,31 +18,39 @@ end
 class Gallery
   attr_accessor :name, :cached_photos
 
-  def initialize(name)
-    @name = name
-    @cached_photos = nil
+  def initialize(id)
+    @id = id
+    @cached_photos = []
   end
 
-  def serialize(limit=false)
-    if limit and self.photos
-      photos = self.photos[0].fname
-    else
-      photos = self.photos.map{ |p| p.fname }
+  def serialize()
+    photos = self.photos.map{ |p| p.fname }
+
+    # Defaults
+    gal_data = {
+      "name" => @id.gsub("-", " "),
+      "description" => "",
+      "lead" => photos.sample
+    }
+
+    meta_file = "public/galleries/#{@id}/meta.yaml"
+    if File.exists? meta_file
+      # Get gallery meta information
+      gal_data.merge!(YAML.load_file(meta_file)) 
     end
 
-    {
-      "name" => @name,
-      "formattedName" => @name.gsub("-", " "),
-      "photos" => photos
-    }
+    gal_data["id"] = @id
+    gal_data["photos"] = photos
+
+    gal_data
   end
 
   def photos
-    if cached_photos
+    if cached_photos.length > 0
       return cached_photos
     end
-    Dir.glob("public/galleries/#{@name}/*.{jpg,JPG}").map{ |fname|
-      Photo.new(@name, fname.split("/")[-1])
+    Dir.glob("public/galleries/#{@id}/*.{jpg,JPG}").map{ |fname|
+      Photo.new(@id, fname.split("/")[-1])
     }.sort_by { |photo| photo.ctime }
   end
 end

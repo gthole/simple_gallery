@@ -18,12 +18,12 @@ class App < Sinatra::Base
   # Core API methods
   get '/api/v1/gallery/' do
     gals = get_galleries()
-    json :objects => gals.map {|gal| gal.serialize(limit: true) }
+    json :objects => gals.map {|gal| gal.serialize }
   end
 
   get '/api/v1/gallery/:gallery_name' do |gallery_name|
     gal = Gallery.new(gallery_name)
-    json gal.serialize()
+    json gal.serialize
   end
 
   # Home view with bootstrapped get list
@@ -31,7 +31,7 @@ class App < Sinatra::Base
   get '/' do
     gals = get_galleries()
     @version = $VERSION
-    @data = {:objects => gals.map {|gal| gal.serialize(limit: true) }}
+    @data = {:objects => gals.map {|gal| gal.serialize }}
     erb :index
   end
 
@@ -44,7 +44,7 @@ class App < Sinatra::Base
     @version = $VERSION
     @data = gal
     @gname = gallery_name
-    @fname = gal["formattedName"]
+    @fname = gal["name"]
     @host = "#{ request.scheme }://#{ request.host }"
     @image = params[:i] || gal["photos"][-1]
     erb :index
