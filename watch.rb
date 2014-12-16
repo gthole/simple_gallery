@@ -1,4 +1,3 @@
-require 'fssm'
 require 'RMagick'
 require 'fileutils'
 
@@ -37,25 +36,35 @@ def build_thumb(base, img, thmb_dir, width)
 end
 
 
+def pkey(file_name)
+  gal, name = file_name.split("/")[-2..-1]
+  return gal, name, "#{gal}/#{name}"
+end
+
+
 # Walk the directories on load to make sure all thumbs exist
-puts "Checking thumbs ..."
+# Build a hash of all the photo sizes to check for updates
+fHash = {}
 Dir.glob("public/galleries/*/*.{jpg,JPG}").each{ |file|
-  gal, name = file.split("/")[-2..-1]
+  gal, name, key = pkey(file)
+  fHash[key] = File.size(file)
   if not (File.exists?("public/galleries/#{gal}/_thumbs/300/#{name}") and
           File.exists?("public/galleries/#{gal}/_thumbs/600/#{name}"))
-    build_thumbs("#{gal}/#{name}")
+    build_thumbs(key)
   end
 }
 
 
-# Monitor the directories for new images
-puts "Watching ..."
-FSSM.monitor("public/galleries/", '*/*') do
-  update do |b, r|
-    build_thumbs(r)
-  end
-
-  create do |b, r|
-    build_thumbs(r)
-  end
+# Poll the directory every 2 minutes and update the thumbs if the file
+# size has changed
+while true do
+  Dir.glob("public/galleries/*/*.{jpg,JPG}").each{ |file|
+    _, _, key = pkey(file)
+    size = File.size(file)
+    if not (fHash[key] == size)
+      build_thumbs(key)
+      fHash[key] = size
+    end
+  }
+  sleep 120
 end
