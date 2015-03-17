@@ -74,6 +74,7 @@ define([
     },
 
     closeModal: function() {
+      this.router.navigate("/" + this.id);
       $(".modal").hide();
     },
 
