@@ -67,8 +67,7 @@ define([
     },
 
     scrollRender: function() {
-      if ($(window).height() + $(window).scrollTop() ===
-          $(document).height()) {
+      if ($(window).height() + $(window).scrollTop() > ($(document).height() / 2)) {
         this.renderPhotos();
       }
     },
@@ -135,7 +134,7 @@ define([
       this.photos = this.gal.get("photos").slice(0);
       this.msnry = new Masonry(
         "#img-container",
-        {columnWidth: ".grid-sizer", itemSelector: ".item"}
+        {columnWidth: ".grid-sizer", itemSelector: ".item", gutter: 5}
       );
       this.renderPhotos();
 

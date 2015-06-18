@@ -1,28 +1,29 @@
 body {
   font-family: Gill Sans, sans-serif;
+  background-color: #222;
 }
 .page {
   margin: 50px 0 20px 0;
 }
 .page #img-container {
-  overflow: hidden;
+  width: 330px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Responsive grid patterns */
 .grid-sizer,.item {
-  width: 50%;
+  width: 150px;
   margin-bottom: 0;
 }
-@media screen and (min-width: 480px) and (max-width: 719px) {
-  .grid-sizer,.item { width: 33%; }
+@media screen and (min-width: 480px) and (max-width: 779px) {
+  .page #img-container{ width: 480px; }
 }
-@media screen and (min-width: 720px) and (max-width: 959px) {
-  .grid-sizer,.item { width: 25%; }
+@media screen and (min-width: 780px) and (max-width: 1079px) {
+  .page #img-container { width: 780px; }
 }
-@media screen and (min-width: 960px) and (max-width: 1679px) {
-  .grid-sizer,.item { width: 20%; }
-}
-@media screen and (min-width: 1680px) {
-  .grid-sizer,.item { width: 10%; }
+@media screen and (min-width: 1080px) {
+  .page #img-container { width: 1080px; }
 }
 .photo {
   max-width: 100%;
