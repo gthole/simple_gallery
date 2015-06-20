@@ -1,5 +1,6 @@
 # gallery.rb
 require 'yaml'
+require 'exifr'
 
 class Photo
   attr_accessor :gallery, :fname
@@ -9,8 +10,9 @@ class Photo
     @fname = fname
   end
 
-  def ctime
-    File.ctime("public/galleries/#{@gallery}/#{@fname}")
+  def date_time
+    meta = EXIFR::JPEG.new("public/galleries/#{@gallery}/#{@fname}")
+    return meta.date_time_original || meta.date_time_digitized || meta.date_time
   end
 end
 
@@ -51,7 +53,7 @@ class Gallery
     end
     Dir.glob("public/galleries/#{@id}/*.{jpg,JPG}").map{ |fname|
       Photo.new(@id, fname.split("/")[-1])
-    }.sort_by { |photo| photo.ctime }
+    }.sort_by { |photo| photo.date_time }
   end
 end
 
