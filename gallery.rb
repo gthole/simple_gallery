@@ -1,6 +1,7 @@
 # gallery.rb
 require 'yaml'
 require 'exifr'
+require 'time'
 
 class Photo
   attr_accessor :gallery, :fname
@@ -13,6 +14,9 @@ class Photo
   def date_time
     meta = EXIFR::JPEG.new("public/galleries/#{@gallery}/#{@fname}")
     ctime = File.ctime("public/galleries/#{@gallery}/#{@fname}")
+    if meta.date_time_original.is_a?(String)
+      return Time.parse(meta.date_time_original)
+    end
     return meta.date_time_original || meta.date_time_digitized || meta.date_time || ctime
   end
 end
