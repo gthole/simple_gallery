@@ -12,7 +12,8 @@ class Photo
 
   def date_time
     meta = EXIFR::JPEG.new("public/galleries/#{@gallery}/#{@fname}")
-    return meta.date_time_original || meta.date_time_digitized || meta.date_time
+    ctime = File.ctime("public/galleries/#{@gallery}/#{@fname}")
+    return meta.date_time_original || meta.date_time_digitized || meta.date_time || ctime
   end
 end
 
